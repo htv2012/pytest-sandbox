@@ -11,5 +11,5 @@ import pytest
         pytest.param("it", marks=[pytest.mark.license(license_kind="enterprise")]),
     ],
 )
-def test_it(language, request):
+def test_lang(language, request):
     logging.debug("Language: %s", language)

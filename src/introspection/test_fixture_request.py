@@ -4,7 +4,7 @@ import logging
 
 import pytest
 
-from . import introspect
+from pytest_sandbox import introspect
 
 
 @pytest.fixture

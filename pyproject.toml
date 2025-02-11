@@ -9,6 +9,8 @@ authors = [
 requires-python = ">=3.12"
 dependencies = [
     "paramiko>=3.5.1",
+    "pytest-check>=2.4.2",
+    "pyyaml>=6.0.2",
 ]
 
 [project.scripts]
@@ -20,5 +22,9 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "pytest-pythonpath>=0.7.3",
     "pytest>=8.3.4",
 ]
+
+[tool.pytest]
+python_paths = "src"

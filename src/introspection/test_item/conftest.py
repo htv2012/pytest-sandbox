@@ -2,8 +2,9 @@
 
 import logging
 
-import introspect
 import pytest
+
+from pytest_sandbox import introspect
 
 
 def pytest_collection_modifyitems(

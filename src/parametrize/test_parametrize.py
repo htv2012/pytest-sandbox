@@ -54,6 +54,7 @@ def test_with_embedded_ids(input_value, base, expected):
 # Test case from YAML
 #
 def load_test_cases(filename):
+    filename = pathlib.Path(__file__).with_name(filename)
     with open(filename) as stream:
         contents = yaml.safe_load(stream)
         labels = contents["labels"]

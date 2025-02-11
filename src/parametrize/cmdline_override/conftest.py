@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
 # conftest.py
+import pathlib
 import types
 
 import pytest
 import yaml
+
+DEFAULT_YAML = str(pathlib.Path(__file__).with_name("default.yaml"))
 
 
 def pytest_addoption(parser: pytest.Parser):
@@ -11,7 +14,7 @@ def pytest_addoption(parser: pytest.Parser):
         "--test-data-files",
         nargs="*",
         action="store",
-        default=["default.yaml"],
+        default=[DEFAULT_YAML],
         help="Data for parametrization",
     )
 

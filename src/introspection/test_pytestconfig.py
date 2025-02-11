@@ -1,6 +1,6 @@
 """Show inside a request object."""
 
-from . import introspect
+from pytest_sandbox import introspect
 
 
 def test_pytestconfig(pytestconfig):
