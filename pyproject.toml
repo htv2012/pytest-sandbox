@@ -1,0 +1,26 @@
+[project]
+name = "pytest-sandbox"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Hai Vu", email = "haivu2004@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = [
+    "paramiko>=3.5.1",
+    "pytest-check>=2.4.2",
+    "pyyaml>=6.0.2",
+]
+
+[project.scripts]
+pytest-sandbox = "pytest_sandbox:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.4",
+]
