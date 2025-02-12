@@ -10,20 +10,23 @@ import pytest
 def actual():
     """Perform the action and return the actual data."""
     return {
-        "metadata": {
-            "name": "My Environment",
-            "tags": ["sandbox", "experimental"],
-        }
+        "name": "env1",
+        "description": "My Environment",
+        "tags": ["sandbox", "experimental"],
     }
 
 
 def test_name(actual):
-    assert actual["metadata"]["name"] == "My Environment"
+    assert actual["name"] == "env1"
 
 
 def test_tag_sandbox(actual):
-    assert "sandbox" in actual["metadata"]["tags"]
+    assert "sandbox" in actual["tags"]
 
 
 def test_tag_experimental(actual):
-    assert "experimental" in actual["metadata"]["tags"]
+    assert "experimental" in actual["tags"]
+
+
+def test_description(actual):
+    assert actual["description"] == "My Environment"

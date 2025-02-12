@@ -337,19 +337,6 @@ wheels = [
 ]
 
 [[package]]
-name = "pytest-assume"
-version = "2.4.3"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "pytest" },
-    { name = "six" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/4a/95/28dcc584679367b15360e1b7b3167311f80cc735b8b2f5ecfa89b7319d10/pytest-assume-2.4.3.tar.gz", hash = "sha256:983e90537660fd7aa18bb554693523020272e7edeee3e40435593297bcc6347e", size = 8695 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e8/5d/ecd54af3d3dc3f69e9cf527449a51bd5ca39cd47aaeab9a74e55603a9ce1/pytest_assume-2.4.3-py3-none-any.whl", hash = "sha256:09074220213b87cf1f400609701a44b75078b4e69588c7227e061ff9b3ecf54b", size = 5980 },
-]
-
-[[package]]
 name = "pytest-check"
 version = "2.4.2"
 source = { registry = "https://pypi.org/simple" }
@@ -369,7 +356,6 @@ dependencies = [
     { name = "ipython" },
     { name = "paramiko" },
     { name = "pudb" },
-    { name = "pytest-assume" },
     { name = "pytest-check" },
     { name = "pyyaml" },
 ]
@@ -384,7 +370,6 @@ requires-dist = [
     { name = "ipython", specifier = ">=8.32.0" },
     { name = "paramiko", specifier = ">=3.5.1" },
     { name = "pudb", specifier = ">=2024.1.3" },
-    { name = "pytest-assume", specifier = ">=2.4.3" },
     { name = "pytest-check", specifier = ">=2.4.2" },
     { name = "pyyaml", specifier = ">=6.0.2" },
 ]
@@ -416,15 +401,6 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/fe/0f/25911a9f080464c59fab9027482f822b86bf0608957a5fcc6eaac85aa515/PyYAML-6.0.2-cp313-cp313-musllinux_1_1_x86_64.whl", hash = "sha256:68ccc6023a3400877818152ad9a1033e3db8625d899c72eacb5a668902e4d652", size = 751597 },
     { url = "https://files.pythonhosted.org/packages/14/0d/e2c3b43bbce3cf6bd97c840b46088a3031085179e596d4929729d8d68270/PyYAML-6.0.2-cp313-cp313-win32.whl", hash = "sha256:bc2fa7c6b47d6bc618dd7fb02ef6fdedb1090ec036abab80d4681424b84c1183", size = 140527 },
     { url = "https://files.pythonhosted.org/packages/fa/de/02b54f42487e3d3c6efb3f89428677074ca7bf43aae402517bc7cca949f3/PyYAML-6.0.2-cp313-cp313-win_amd64.whl", hash = "sha256:8388ee1976c416731879ac16da0aff3f63b286ffdd57cdeb95f3f2e085687563", size = 156446 },
-]
-
-[[package]]
-name = "six"
-version = "1.17.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/94/e7/b2c673351809dca68a0e064b6af791aa332cf192da575fd474ed7d6f16a2/six-1.17.0.tar.gz", hash = "sha256:ff70335d468e7eb6ec65b95b99d3a2836546063f63acc5171de367e834932a81", size = 34031 }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl", hash = "sha256:4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274", size = 11050 },
 ]
 
 [[package]]
