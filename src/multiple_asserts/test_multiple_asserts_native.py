@@ -4,9 +4,12 @@ import pytest
 @pytest.mark.parametrize(
     "json_data",
     [
-        {"key": "good afternoon!"},
-        {},
-        {"key": "good morning!", "evil key!": "i shouldn't be here!"},
+        pytest.param({"key": "good afternoon!"}),
+        pytest.param({}, marks=pytest.mark.xfail(reason="empty JSON object")),
+        pytest.param(
+            {"key": "good morning!", "evil key!": "i shouldn't be here!"},
+            marks=pytest.mark.xfail(reason="evil key present"),
+        ),
     ],
 )
 def test_multiple_assertions(json_data: dict):

@@ -1,1 +1,1 @@
-alias t='uv run pytest'
+alias t='uv run pytest -v'

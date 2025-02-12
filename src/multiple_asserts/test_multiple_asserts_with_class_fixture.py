@@ -39,12 +39,12 @@ class TestItWithFailures:
         test_data["b"] = 200
         test_data["c"] = 300
 
+    @pytest.mark.xfail(reason="Failed because of previous modification")
     def test_b_value(self, test_data):
-        # Failed because of previous modification
         assert test_data["b"] == 2
 
+    @pytest.mark.xfail(reason="Failed because of previous modification")
     def test_c_value(self, test_data):
-        # Failed because of previous modification
         assert test_data["c"] == 3
 
 
