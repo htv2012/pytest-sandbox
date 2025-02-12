@@ -36,3 +36,10 @@ def test_m1_friday():
 @pytest.mark.Saturday
 def test_m1_saturday():
     pass
+
+
+@pytest.mark.Monday
+@pytest.mark.Tuesday
+@pytest.mark.Wednesday
+def test_m1_start_of_week():
+    pass

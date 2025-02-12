@@ -1,12 +1,10 @@
-# Idea
-We have so many tests, we need to split them up, some run on Monday, some run on Tuesday, ...
+# Split Tests into Different Days
 
-# How to run the tests
+There are times when we want to split tests into different days of the
+week. Some tests will be run on Monday, yet others will be run on Tuesday
+and so on.
 
-```bash
-# Run tests for today
-make 
-
-# Run tests for Monday
-make WEEKDAY=Monday
-```
+One way to achieve this objective is to mark tests with markers
+such as `Monday`, `Tuesday`, ... `Sunday`. Then we implement the
+`pytest_runtest_setup()` hook to skip those tests which are not meant
+for today.
