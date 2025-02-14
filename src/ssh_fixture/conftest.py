@@ -1,21 +1,20 @@
-import json
-import logging
-
+import fabric
 import paramiko
 import pytest
 
 
-def ssh_connect():
-    with open("config.json") as stream:
-        test_config = json.load(stream)
-    client = paramiko.SSHClient()
-    client.load_system_host_keys()
-    client.connect(**test_config, timeout=3)
-    return client
+def get_test_hostnames():
+    config: paramiko.config.Config = fabric.Config().base_ssh_config
+    names = [name for name in config.get_hostnames() if name.startswith("ssh-sandbox")]
+    return names
 
 
-@pytest.fixture
-def ssh_client(request: pytest.FixtureRequest):
-    logging.info("Root: %s", request.config.rootpath)
-    with ssh_connect() as client:
-        yield client
+@pytest.fixture(params=get_test_hostnames())
+def conn(request: pytest.FixtureRequest):
+    """A fabric.Connection"""
+    try:
+        connection = fabric.Connection(host=request.param, connect_timeout=2)
+        connection.run("whoami", hide=True)
+        return connection
+    except (paramiko.ssh_exception.NoValidConnectionsError, TimeoutError):
+        pytest.skip(f"Host {request.param} is not online.")
