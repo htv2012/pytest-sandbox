@@ -1,45 +1,46 @@
 #!/usr/bin/env python3
-"""
-These are good candidates to represent test case data, but the test
-IDs are not set.
-"""
-
+import collections
 import dataclasses
-import typing
 
 import pytest
 
-
-class Param(typing.NamedTuple):
-    ingress: str = None
-    egress: str = None
-    wild: bool = False
-
-
-@pytest.mark.parametrize(
-    "test_data",
-    [
-        pytest.param(Param(ingress="tcp", egress="tcp"), id='tcp-tcp'),
-        pytest.param(Param(ingress="udp", egress="udp", wild=True), id='udp-udp'),
-    ],
+Param = collections.namedtuple(
+    "Param",
+    ["tid", "ingress", "egress"],
 )
-def test1(test_data):
-    assert test_data.ingress in {"udp", "tcp", "tcp+tls"}
 
 
 @dataclasses.dataclass
 class Param2:
+    tid: str
     ingress: str
     egress: str
     wild: bool = False
 
 
+def get_test_id(test_data):
+    return test_data.tid
+
+
 @pytest.mark.parametrize(
     "test_data",
     [
-        pytest.param(Param2(ingress="tcp", egress="tcp"), id='tcp-tcp'),
-        pytest.param(Param2(ingress="udp", egress="udp", wild=True), id='udp-udp'),
+        Param(tid="tcp-tcp", ingress="tcp", egress="tcp"),
+        Param(tid="udp-udp", ingress="udp", egress="udp"),
     ],
+    ids=get_test_id,
+)
+def test1(test_data):
+    assert test_data.ingress in {"udp", "tcp", "tcp+tls"}
+
+
+@pytest.mark.parametrize(
+    "test_data",
+    [
+        Param2("tcp-tcp", ingress="tcp", egress="tcp"),
+        Param2("udp-udp", ingress="udp", egress="udp", wild=True),
+    ],
+    ids=get_test_id,
 )
 def test2(test_data):
     assert test_data.ingress in {"udp", "tcp", "tcp+tls"}
