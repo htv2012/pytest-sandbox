@@ -6,19 +6,19 @@
 .PHONY: help pudb ipython pdb clean
 
 help:
-	@echo Targets are: pudb, ipython, and clean
+	@echo Targets are: pdb, pudb, ipython, and clean
 
 pudb:
 	# Debug with pudb
-	pytest --pdbcls=pudb.debugger:Debugger --pdb --capture=no --exitfirst --color=no
+	uv run pytest --pdbcls=pudb.debugger:Debugger --pdb --capture=no --exitfirst --color=no
 
 ipython:
 	# Debug with ipython
-	pytest --pdbcls=IPython.terminal.debugger:Pdb --pdb --capture=no --exitfirst --color=no
+	uv run pytest --pdbcls=IPython.terminal.debugger:Pdb --pdb --capture=no --exitfirst --color=no
 
 pdb:
 	# Debug with the standard pdb
-	pytest --pdb --capture=no --exitfirst --color=no
+	uv run pytest --pdb --capture=no --exitfirst --color=no
 
 clean:
 	-rm -fr __pycache__
