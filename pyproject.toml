@@ -26,7 +26,9 @@ build-backend = "hatchling.build"
 
 [dependency-groups]
 dev = [
+    "ipdb>=0.13.13",
     "pytest>=8.3.4",
+    "ruff>=0.9.10",
 ]
 
 [tool.pytest.ini_options]
