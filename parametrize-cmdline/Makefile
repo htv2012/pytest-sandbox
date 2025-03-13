@@ -13,8 +13,8 @@ lint:
 ### Run unit tests
 test: lint
 	uv run pytest -s -v
-	TEST_SERVERS=env1.com,env2.com uv run pytest -s -v
-	uv run pytest -s -v --test-server cmdline1.com --test-server cmdline2.com
+	TEST_PORTS=9001,9002 TEST_SERVERS=env1.com,env2.com uv run pytest -s -v
+	uv run pytest --test-servers=cmdline1.com,cmdline2.com --test-ports=8005,8006,8007 -s -v
 
 ### Clean up generated files
 clean:
