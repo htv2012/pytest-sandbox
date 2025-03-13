@@ -19,8 +19,8 @@ class Param(typing.NamedTuple):
 @pytest.mark.parametrize(
     "test_data",
     [
-        Param(ingress="tcp", egress="tcp"),
-        Param(ingress="udp", egress="udp", wild=True),
+        pytest.param(Param(ingress="tcp", egress="tcp"), id='tcp-tcp'),
+        pytest.param(Param(ingress="udp", egress="udp", wild=True), id='udp-udp'),
     ],
 )
 def test1(test_data):
@@ -37,8 +37,8 @@ class Param2:
 @pytest.mark.parametrize(
     "test_data",
     [
-        Param2(ingress="tcp", egress="tcp"),
-        Param2(ingress="udp", egress="udp", wild=True),
+        pytest.param(Param2(ingress="tcp", egress="tcp"), id='tcp-tcp'),
+        pytest.param(Param2(ingress="udp", egress="udp", wild=True), id='udp-udp'),
     ],
 )
 def test2(test_data):
