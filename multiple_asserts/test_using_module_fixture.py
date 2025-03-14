@@ -8,8 +8,9 @@ import pytest
 # ======================================================================
 
 
-@pytest.fixture(scope="module")
-def payload():
+@pytest.fixture(name="payload", scope="module")
+def perform_test():
+    """Perform test and return the payload received"""
     return {"id": 1, "userId": 501}
 
 
