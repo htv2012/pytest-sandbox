@@ -1,9 +1,9 @@
 import csv
 import pathlib
 import random
+import tomllib
 
 import pytest
-import tomllib
 
 
 def load_test_options():
