@@ -1,15 +1,15 @@
 import pathlib
-import tomllib
 
 import pytest
+import yaml
 
 
 def _load_data():
-    data_path = pathlib.Path(__file__).with_name("cases.toml")
+    data_path = pathlib.Path(__file__).with_name("users.yaml")
     assert data_path.exists()
 
     with open(data_path, "rb") as stream:
-        raw = tomllib.load(stream)
+        raw = yaml.safe_load(stream)
 
     for test_id, data in raw.items():
         yield pytest.param(

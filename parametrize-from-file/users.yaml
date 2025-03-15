@@ -1,0 +1,12 @@
+admin_user:
+  uid: 501
+  shell: "bash"
+
+regular_user:
+  uid: 502
+  shell: "zsh"
+
+root_user:
+  uid: 0
+  shell: "sh"
+
