@@ -1,12 +1,12 @@
 FILE ?= *.py
 
 run: lint
-	pytest -s -vv $(FILE)
+	uv run pytest -s -vv $(FILE)
 
 lint: format
-	ruff . --fix
+	uv run ruff check . --fix
 
 format:
-	ruff check--select I --fix .
-	ruff format .
+	uv run ruff check --select I --fix .
+	uv run ruff format .
 
