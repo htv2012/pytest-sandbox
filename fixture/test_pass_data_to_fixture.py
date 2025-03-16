@@ -10,7 +10,10 @@ def app(request):
     if app_kind is None:
         return "app"
 
-    return f"{app_kind.args[0]}-app"
+    try:
+        return f"{app_kind.args[0]}-app"
+    except IndexError:
+        return "app"
 
 
 @pytest.mark.app_kind("web")
