@@ -5,7 +5,8 @@ import yaml
 
 
 def _load_data():
-    data_path = pathlib.Path(__file__).with_name("users.yaml")
+    here = pathlib.Path(__file__).parent
+    data_path = here / "data" / "users.yaml"
     assert data_path.exists()
 
     with open(data_path, "rb") as stream:
