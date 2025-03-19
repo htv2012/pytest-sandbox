@@ -2,6 +2,7 @@
 The `request` fixture has an attribute `path` which is the path of the
 test script. We can use that in order to locate the `data` dir
 """
+import pathlib
 
 import pytest
 import yaml
@@ -9,7 +10,7 @@ import yaml
 
 @pytest.fixture
 def data_path(request):
-    script_dir = request.path.parent
+    script_dir: pathlib.Path = request.path.parent
     return script_dir / "data"
 
 

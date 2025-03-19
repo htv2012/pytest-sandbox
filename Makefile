@@ -5,8 +5,6 @@ all: test
 
 ### Perform static analysis
 lint:
-	uv tool run ruff check --select I --fix .
-	uv tool run ruff format .
 	uv tool run ruff check . --fix
 
 ### Run the project
