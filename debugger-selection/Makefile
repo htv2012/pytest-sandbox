@@ -10,7 +10,7 @@ help:
 
 pudb:
 	# Debug with pudb
-	uv run pytest --pdbcls=pudb.debugger:Debugger --pdb --capture=no --exitfirst --color=no
+	uv run pytest --log-cli-level=CRITICAL --pdbcls=pudb.debugger:Debugger --pdb --capture=no --exitfirst --color=no
 
 ipython:
 	# Debug with ipython
