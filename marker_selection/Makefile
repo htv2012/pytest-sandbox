@@ -1,22 +1,19 @@
 .PHONY: test
 
 test_license:
-	ruff format .
-	ruff check --select I --fix .
-	ruff check --fix .
-
-	@echo -e "\n#"
+	uv run ruff format .
+	uv run ruff check --select I --fix .
+	uv run ruff check --fix .
+	@echo "\n#"
 	@echo "# Test all licenses"
 	@echo "#"
-	pytest --no-header -v
-
-	@echo -e "\n#"
+	uv run pytest --no-header -v
+	@echo "\n#"
 	@echo "# Skip trial license"
 	@echo "#"
-	pytest --no-header -v -m "not license(license_kind='trial')" 
-
-	@echo -e "\n#"
+	uv run pytest --no-header -v -m "not license(license_kind='trial')" 
+	@echo "\n#"
 	@echo "# Only trial license"
 	@echo "#"
-	pytest --no-header -v -m "license(license_kind='trial')" 
+	uv run pytest --no-header -v -m "license(license_kind='trial')" 
 

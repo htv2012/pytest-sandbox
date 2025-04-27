@@ -1,5 +1,3 @@
-import logging
-
 import pytest
 
 
@@ -12,4 +10,4 @@ import pytest
     ],
 )
 def test_lang(language, request):
-    logging.debug("Language: %s", language)
+    pass
