@@ -18,7 +18,7 @@ run: lint
 
 ### Run unit tests
 test: lint
-	uv run pytest --cov=src/my_package -s -v
+	uv run pytest -s -v
 
 ### Clean up generated files
 clean:

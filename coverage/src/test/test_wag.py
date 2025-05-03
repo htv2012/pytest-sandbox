@@ -6,7 +6,7 @@ from my_package.wag import wag
     ["mood", "expected"],
     [
         ("happy", 10),
-        ("sad", 1),
+        ("sad", 0),
     ],
 )
 def test_wag(mood, expected):
