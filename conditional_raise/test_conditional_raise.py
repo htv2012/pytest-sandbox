@@ -17,6 +17,7 @@ def expected_error(klass):
     ["x", "y", "expected", "error"],
     [
         pytest.param(5, 2, 2.5, None, id="happy path"),
+        pytest.param(5, 2, 2, None, id="expected fail", marks=pytest.mark.xfail),
         pytest.param(5, 0, None, ZeroDivisionError, id="div by zero"),
         pytest.param(5, "a", None, TypeError, id="int div by str"),
     ],
