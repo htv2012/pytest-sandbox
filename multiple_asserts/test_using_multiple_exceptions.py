@@ -9,6 +9,7 @@ def _verify_positive(n):
     assert n > 0, "Positive test"
 
 
+@pytest.mark.xfail(reason="Failed for demo only")
 def test_value():
     value = -5
     errors = []
