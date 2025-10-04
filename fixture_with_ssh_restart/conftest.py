@@ -1,12 +1,26 @@
 import logging
+import pathlib
 import time
 
 import paramiko
 import pytest
 
 
-@pytest.fixture(scope="session")
-def ssh_client():
+@pytest.fixture(scope="module")
+def test_config():
+    config_path = pathlib.Path("~/.ssh/config").expanduser()
+    if not config_path.exists():
+        pytest.skip("~/.ssh/config does not exist")
+
+    config = paramiko.SSHConfig.from_path(config_path)
+    if "test1" not in config.get_hostnames():
+        pytest.skip("Test host 'test1' is not configured")
+
+    return config.lookup("test1")
+
+
+@pytest.fixture(scope="module")
+def ssh_client(test_config):
     """
     Create a ssh client and perform some prep works remotely.
     """
@@ -14,7 +28,7 @@ def ssh_client():
     client = paramiko.SSHClient()
     client.load_system_host_keys()
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy)
-    client.connect("192.168.64.18", username="ubuntu")
+    client.connect(hostname=test_config["hostname"], username=test_config["user"])
     logging.info("Connected")
 
     logging.info("Prep the remote host")
@@ -26,13 +40,16 @@ def ssh_client():
     logging.info("Second connection...")
     while True:
         try:
-            client.connect("192.168.64.18", username="ubuntu")
+            client.connect(
+                hostname=test_config["hostname"], username=test_config["user"]
+            )
             logging.info("Connected again")
             break
         except (
             paramiko.SSHException,
             paramiko.ssh_exception.NoValidConnectionsError,
         ):
+            logging.info("Waiting for host...")
             time.sleep(3)
 
     yield client

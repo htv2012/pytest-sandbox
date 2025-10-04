@@ -1,10 +1,9 @@
 all: lint
-	pytest -s -v
+	uv run pytest -s -v
 
-lint: format
-	ruff check . --fix
+lint:
+	@uv run ruff check --select I --fix . --quiet
+	@uv run ruff format . --quiet
+	@uv run ruff check . --fix --quiet
 
-format:
-	ruff check --select I --fix .
-	ruff format .
 
