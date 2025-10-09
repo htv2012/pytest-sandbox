@@ -22,5 +22,5 @@ def _load_data():
 
 @pytest.mark.parametrize(["uid", "shell"], _load_data())
 def test_user(uid, shell):
-    assert uid >= 0
-    assert shell.endswith("sh")
+    assert uid >= 500 or uid == 0
+    assert shell in {"sh", "bash", "zsh"}
