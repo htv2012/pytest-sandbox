@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
-from numericlib import generate_odd_number
+import random
+import pytest
+
+
+# Use as a function
+def generate_odd_number() -> int:
+    """Generate an odd integer."""
+    return 7
+
+# Use as a fixture
+odd_number = pytest.fixture(generate_odd_number)
 
 
 def test_odd():
