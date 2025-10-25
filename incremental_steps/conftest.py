@@ -27,6 +27,7 @@ def pytest_runtest_makereport(item, call):
     _test_failed_incremental.setdefault(cls_name, {}).setdefault(
         parametrize_index, test_name
     )
+    breakpoint()
 
 
 def pytest_runtest_setup(item):
@@ -45,6 +46,7 @@ def pytest_runtest_setup(item):
     )
     # retrieve the name of the first test function to fail for this class name and index
     test_name = _test_failed_incremental[cls_name].get(parametrize_index, None)
+    print(f"{_test_failed_incremental=}")
     # if name found, test has failed for the combination of class name & test name
     if test_name is not None:
-        pytest.xfail("previous test failed: {}".format(test_name))
+        pytest.skip("previous test failed: {}".format(test_name))
