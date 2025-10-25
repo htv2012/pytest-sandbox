@@ -1,11 +1,12 @@
 # content of conftest.py
 
-from typing import Dict, Tuple
+from collections import defaultdict
 
 import pytest
 
 # store history of failures per test class name and per index in parametrize (if parametrize used)
-_test_failed_incremental: Dict[str, Dict[Tuple[int, ...], str]] = {}
+# _test_failed_incremental: Dict[str, Dict[Tuple[int, ...], str]] = {}
+_test_failed_incremental = defaultdict(lambda: defaultdict(dict))
 
 
 def pytest_runtest_makereport(item, call):
@@ -24,10 +25,7 @@ def pytest_runtest_makereport(item, call):
     # retrieve the name of the test function
     test_name = item.originalname or item.name
     # store in _test_failed_incremental the original name of the failed test
-    _test_failed_incremental.setdefault(cls_name, {}).setdefault(
-        parametrize_index, test_name
-    )
-    breakpoint()
+    _test_failed_incremental[cls_name][parametrize_index] = test_name
 
 
 def pytest_runtest_setup(item):
@@ -46,7 +44,6 @@ def pytest_runtest_setup(item):
     )
     # retrieve the name of the first test function to fail for this class name and index
     test_name = _test_failed_incremental[cls_name].get(parametrize_index, None)
-    print(f"{_test_failed_incremental=}")
     # if name found, test has failed for the combination of class name & test name
     if test_name is not None:
         pytest.skip("previous test failed: {}".format(test_name))

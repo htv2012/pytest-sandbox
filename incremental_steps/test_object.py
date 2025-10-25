@@ -7,6 +7,10 @@ def test_object():
     return create_object()
 
 
+def test_id(test_object):
+    assert test_object.id > 1000
+
+
 @pytest.mark.incremental
 def test_create(test_object):
     assert test_object.status == "created"
