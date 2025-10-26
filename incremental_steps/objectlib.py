@@ -1,7 +1,7 @@
 class MyObject:
     def __init__(self):
         self.id = 1
-        self.status = "created"
+        self.status = "unknown"
 
     def delete(self):
         self.status = "deleted"

@@ -1,16 +1,11 @@
-# content of conftest.py
-
-
+# conftest.py
 import pytest
 
 # store history of failures per test class name and per index in parametrize (if parametrize used)
 _failed = {}
 
 
-def pytest_runtest_makereport(item, call):
-    # if call.when != "teardown":
-    # return
-
+def pytest_runtest_makereport(item: pytest.Function, call: pytest.CallInfo):
     if "incremental" not in item.keywords:
         return
 
@@ -19,25 +14,12 @@ def pytest_runtest_makereport(item, call):
 
     cls_name = str(item.cls)
 
-    print(f"{item.reportinfo()=}")
-    print(f"{item.location=}")
-    print(f"{item.name=}, {call.when=}")
-    path, _, test_name = item.location
-    parent = path.replace(".py", "").replace("/", ".") + "::"
-    if "." in test_name:
-        class_name, test_name = test_name.rsplit(".", 1)
-        parent = f"{parent}{class_name}::"
-
-    print(f">>>{parent}{test_name}")
-
-    if item.cls is not None:
-        print(f"{item.cls.__name__=}")
     # retrieve the index of the test (if parametrize is used in combination with incremental)
     parametrize_index = (
         tuple(item.callspec.indices.values()) if hasattr(item, "callspec") else ()
     )
 
-    # retrieve the name of the test function
+    # retrieve the name of the test itemtion
     test_name = item.originalname or item.name
     # store in _failed the original name of the failed test
     # _failed[cls_name][parametrize_index] = test_name
@@ -58,7 +40,7 @@ def pytest_runtest_setup(item):
     parametrize_index = (
         tuple(item.callspec.indices.values()) if hasattr(item, "callspec") else ()
     )
-    # retrieve the name of the first test function to fail for this class name and index
+    # retrieve the name of the first test itemtion to fail for this class name and index
     # test_name = _failed[cls_name].get(parametrize_index, None)
     test_name = _failed.get(cls_name, {}).get(parametrize_index, None)
     # if name found, test has failed for the combination of class name & test name
