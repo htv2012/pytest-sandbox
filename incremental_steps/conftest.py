@@ -8,6 +8,9 @@ _failed = {}
 
 
 def pytest_runtest_makereport(item, call):
+    # if call.when != "teardown":
+    # return
+
     if "incremental" not in item.keywords:
         return
 
@@ -15,6 +18,20 @@ def pytest_runtest_makereport(item, call):
         return
 
     cls_name = str(item.cls)
+
+    print(f"{item.reportinfo()=}")
+    print(f"{item.location=}")
+    print(f"{item.name=}, {call.when=}")
+    path, _, test_name = item.location
+    parent = path.replace(".py", "").replace("/", ".") + "::"
+    if "." in test_name:
+        class_name, test_name = test_name.rsplit(".", 1)
+        parent = f"{parent}{class_name}::"
+
+    print(f">>>{parent}{test_name}")
+
+    if item.cls is not None:
+        print(f"{item.cls.__name__=}")
     # retrieve the index of the test (if parametrize is used in combination with incremental)
     parametrize_index = (
         tuple(item.callspec.indices.values()) if hasattr(item, "callspec") else ()
