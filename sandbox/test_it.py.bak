@@ -1,0 +1,21 @@
+import pytest
+
+
+@pytest.fixture(scope="module")
+def obj():
+    """Object under test"""
+    return {"a": 1, "b": 2}
+
+
+def test_len(obj):
+    assert len(obj) == 3
+
+
+@pytest.mark.requires("test_len")
+def test_a_value(obj):
+    assert obj["a"] == 10
+
+
+@pytest.mark.requires("test_len")
+def test_b_value(obj):
+    assert obj["b"] == 20

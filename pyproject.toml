@@ -43,6 +43,7 @@ markers = [
     "Friday",
     "incremental",
     "license",
+    "depends_on",
     "long",
     "Monday",
     "require_env",

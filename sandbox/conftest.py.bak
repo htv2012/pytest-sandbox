@@ -1,0 +1,34 @@
+import logging
+
+import pytest
+
+logger = logging.getLogger()
+
+
+# A global dictionary to store results
+test_results = {}
+
+
+def pytest_runtest_logreport(report):
+    """Called for each phase of each test (setup/call/teardown)."""
+    if report.when != "call":  # only store final outcome of the test
+        return
+    test_results[report.nodeid] = report.outcome  # 'passed', 'failed', or 'skipped'
+
+
+def pytest_runtest_setup(item: pytest.Function):
+    logger.debug(f"{item.name=}")
+
+    # Locate the requires mark
+    requires_mark = next((mark for mark in item.iter_markers(name="requires")), None)
+    if requires_mark is None:
+        logger.debug(f"{item.name} has no `requires` mark")
+        return
+
+    prefix = item.nodeid.replace(item.name, "")
+    for test_name in requires_mark.args:
+        node_id = f"{prefix}{test_name}"
+        result = test_results.get(node_id, "not yet run")
+        if result != "passed":
+            pytest.skip(f"Skip because {node_id} {result}")
+            return
