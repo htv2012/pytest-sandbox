@@ -4,7 +4,7 @@ import pytest
 @pytest.fixture(
     scope="module",
     params=[
-        pytest.param({"amount": 25.1, "tax": 0.108, "total": 27.8108}, id="passing"),
+        pytest.param({"amount": 25.1, "tax": 0.108, "total": 27.8108}, id="happy path"),
         pytest.param({}, id="empty dict"),
         pytest.param({"amount": 25.1, "tax": 0.18, "total": None}, id="tax too high"),
     ],
@@ -35,4 +35,4 @@ def test_tax(obj):
 @pytest.mark.depends_on("test_amount", "test_tax")
 def test_total(obj):
     assert "total" in obj
-    assert obj["amount"] * (1 + obj["tax"]) == obj["total"]
+    assert obj["amount"] * (1 + obj["tax"]) == pytest.approx(obj["total"])
