@@ -1,0 +1,30 @@
+#
+# Test basic user
+#
+test_user:
+  admin user:
+    uid: 501
+    shell: "bash"
+  regular user:
+    uid: 502
+    shell: "zsh"
+  root user:
+    uid: 0
+    shell: "sh"
+
+#
+# Test a more complex user
+#
+test_complex:
+  # Test case: root user should have sudo permission
+  root user:
+    uid: 0
+    permissions:
+      sudo: true
+      print: true
+  # Test case: guest user should not have sudo permission
+  guest user:
+    uid: 1001
+    permissions:
+      sudo: false
+      print: true
