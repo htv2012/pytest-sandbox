@@ -4,12 +4,12 @@ import pytest
 import yaml
 
 
-def parametrize_from_file(path: pathlib.Path, test_name: str, argnames: list[str]):
+def parametrize_from_file(path: pathlib.Path, section: str, argnames: list[str]):
     path = pathlib.Path(path)
     with open(path, "rb") as stream:
         content = yaml.safe_load(stream)
 
-    test_params = content[test_name]
+    test_params = content[section]
     return pytest.mark.parametrize(
         argnames,
         [
