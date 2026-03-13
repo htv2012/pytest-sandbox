@@ -1,0 +1,21 @@
+[project]
+name = "inline-snapshot-sandbox"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Hai Vu", email = "haivu2004@gmail.com" }
+]
+requires-python = ">=3.13"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "inline-snapshot>=0.32.5",
+    "jupyterlab>=4.3.5",
+    "pytest>=8.3.4",
+    "ruff>=0.9.7",
+]
