@@ -5,18 +5,17 @@ import pytest
     scope="module",
     params=[
         pytest.param({"amount": 25.1, "tax": 0.108, "total": 27.8108}, id="happy path"),
-        pytest.param({}, id="empty dict"),
-        pytest.param({"amount": 25.1, "tax": 0.18, "total": None}, id="tax too high"),
+        pytest.param({}, id="empty dict", marks=pytest.mark.xfail),
+        pytest.param(
+            {"amount": 25.1, "tax": 0.18, "total": None},
+            id="tax too high",
+            marks=pytest.mark.xfail,
+        ),
     ],
 )
 def obj(request):
     """Object under test"""
     return request.param
-
-
-def test_obj_structure(obj):
-    assert isinstance(obj, dict)
-    assert len(obj) == 3
 
 
 @pytest.mark.depends_on("test_obj_structure")
@@ -36,3 +35,8 @@ def test_tax(obj):
 def test_total(obj):
     assert "total" in obj
     assert obj["amount"] * (1 + obj["tax"]) == pytest.approx(obj["total"])
+
+
+def test_obj_structure(obj):
+    assert isinstance(obj, dict)
+    assert len(obj) == 3

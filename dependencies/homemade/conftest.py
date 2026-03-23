@@ -8,6 +8,11 @@ import pytest
 OUTCOME = {}
 
 
+def pytest_collection_modifyitems(session, config, items):
+    print("\n\n*** test_collection_modifyitems\n\n")
+    breakpoint()
+
+
 def pytest_runtest_logreport(report):
     """Called for each phase of each test (setup/call/teardown)."""
     if report.when != "call":  # only store final outcome of the test
