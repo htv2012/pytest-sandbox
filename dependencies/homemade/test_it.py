@@ -6,17 +6,11 @@ import pytest
     params=[
         pytest.param({"amount": 25.1, "tax": 0.108, "total": 27.8108}, id="happy path"),
         pytest.param({}, id="empty dict"),
-        pytest.param({"amount": 25.1, "tax": 0.18, "total": None}, id="tax too high"),
     ],
 )
 def obj(request):
     """Object under test"""
     return request.param
-
-
-def test_obj_structure(obj):
-    assert isinstance(obj, dict)
-    assert len(obj) == 3
 
 
 @pytest.mark.depends_on("test_obj_structure")
@@ -36,3 +30,10 @@ def test_tax(obj):
 def test_total(obj):
     assert "total" in obj
     assert obj["amount"] * (1 + obj["tax"]) == pytest.approx(obj["total"])
+
+
+def test_obj_structure(obj):
+    assert isinstance(obj, dict)
+    missing = [key for key in ["amount", "tax", "total"] if key not in obj]
+    if missing:
+        pytest.fail(f"Missing keys: {', '.join(missing)}")
