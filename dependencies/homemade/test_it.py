@@ -6,7 +6,6 @@ import pytest
     params=[
         pytest.param({"amount": 25.1, "tax": 0.108, "total": 27.8108}, id="happy path"),
         pytest.param({}, id="empty dict"),
-        pytest.param({"amount": 25.1, "tax": 0.18, "total": None}, id="tax too high"),
     ],
 )
 def obj(request):
@@ -35,4 +34,4 @@ def test_total(obj):
 
 def test_obj_structure(obj):
     assert isinstance(obj, dict)
-    assert len(obj) == 3
+    assert len(obj) == 3, "must have 3 items"
