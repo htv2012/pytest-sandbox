@@ -5,12 +5,8 @@ import pytest
     scope="module",
     params=[
         pytest.param({"amount": 25.1, "tax": 0.108, "total": 27.8108}, id="happy path"),
-        pytest.param({}, id="empty dict", marks=pytest.mark.xfail),
-        pytest.param(
-            {"amount": 25.1, "tax": 0.18, "total": None},
-            id="tax too high",
-            marks=pytest.mark.xfail,
-        ),
+        pytest.param({}, id="empty dict"),
+        pytest.param({"amount": 25.1, "tax": 0.18, "total": None}, id="tax too high"),
     ],
 )
 def obj(request):
