@@ -34,4 +34,6 @@ def test_total(obj):
 
 def test_obj_structure(obj):
     assert isinstance(obj, dict)
-    assert len(obj) == 3, "must have 3 items"
+    missing = [key for key in ["amount", "tax", "total"] if key not in obj]
+    if missing:
+        pytest.fail(f"Missing keys: {', '.join(missing)}")
