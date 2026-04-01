@@ -13,27 +13,18 @@ def obj(request):
     return request.param
 
 
-@pytest.mark.depends_on("test_obj_structure")
 def test_amount(obj):
-    assert "amount" in obj
+    assert "amount" in obj, "Missing amount"
     assert isinstance(obj["amount"], float)
 
 
-@pytest.mark.depends_on("test_obj_structure")
 def test_tax(obj):
-    assert "tax" in obj
+    assert "tax" in obj, "Missing tax"
     assert isinstance(obj["tax"], float)
     assert obj["tax"] < 0.15  # Tax should be less than 15%
 
 
 @pytest.mark.depends_on("test_amount", "test_tax")
 def test_total(obj):
-    assert "total" in obj
+    assert "total" in obj, "Missing total"
     assert obj["amount"] * (1 + obj["tax"]) == pytest.approx(obj["total"])
-
-
-def test_obj_structure(obj):
-    assert isinstance(obj, dict)
-    missing = [key for key in ["amount", "tax", "total"] if key not in obj]
-    if missing:
-        pytest.fail(f"Missing keys: {', '.join(missing)}")
