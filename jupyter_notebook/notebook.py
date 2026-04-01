@@ -2,7 +2,7 @@ import subprocess
 import tempfile
 
 
-def is_valid_notebook(notebook_path: str):
+def has_no_exception(notebook_path: str):
     with tempfile.TemporaryDirectory() as tmp_path:
         process = subprocess.run(
             [
